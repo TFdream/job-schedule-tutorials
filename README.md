@@ -1,4 +1,4 @@
-# job-scheduler-tutorial
+# job-schedule-tutorial
 分布式任务调度框架教程, 包括: Quartz、Elastic-Job和Fenzo.
 
 ## Quartz
