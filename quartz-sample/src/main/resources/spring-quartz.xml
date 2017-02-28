@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 引入配置文件 -->
+    <util:properties id="quartz" location="classpath:quartz.properties"/>
+
+    <bean id="quartzDemoService" class="com.bytebeats.quartz.sample.service.QuartzDemoService" >
+        <constructor-arg index="0" value="#{quartz['url']}"/>
+        <constructor-arg index="1" value="#{quartz['priority']}"/>
+    </bean>
+
+    <bean id="quartzDemoJob"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="quartzDemoService" />
+        <property name="targetMethod" value="run">
+        </property>
+    </bean>
+    <bean id="quartzDemoTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="quartzDemoJob" />
+        <!-- 5分钟运行一次 -->
+        <property name="cronExpression">
+            <value>0 0/5 * * * ?</value>
+        </property>
+    </bean>
+
+    <!--simple job-->
+    <bean id="simpleJobService" class="com.bytebeats.quartz.sample.service.SimpleJobService" />
+    <bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="simpleJobService" />
+        <property name="targetMethod" value="execute" />
+    </bean>
+    <bean id="simpleTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="simpleJobDetail" />
+        <property name="startDelay" value="1000" />
+        <property name="repeatInterval" value="2000" />
+    </bean>
+
+    <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+
+            </list>
+        </property>
+
+        <property name="triggers">
+            <list>
+                <ref bean="quartzDemoTrigger" />
+                <ref bean="simpleTrigger" />
+            </list>
+        </property>
+    </bean>
+
+</beans>

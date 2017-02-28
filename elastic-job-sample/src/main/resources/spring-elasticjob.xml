@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dangdang.com/schema/ddframe/reg
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+                        http://www.dangdang.com/schema/ddframe/job
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd
+                        http://www.springframework.org/schema/util
+                        http://www.springframework.org/schema/util/spring-util.xsd
+                        ">
+    <!-- 引入配置文件 -->
+    <util:properties id="zk" location="classpath:zk_config.properties"/>
+
+    <!--configure registry center -->
+    <reg:zookeeper id="regCenter" server-lists="#{zk['host']}" namespace="#{zk['namespace']}"
+                   base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
+
+    <!--configure job -->
+    <job:simple id="demoElasticJob" class="com.bytebeats.elasticjob.sample.job.DemoElasticJob"
+                registry-center-ref="regCenter" cron="* 0/5 * * * ?" sharding-total-count="3" sharding-item-parameters="0=A,1=B,2=C" />
+</beans>
