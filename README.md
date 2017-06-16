@@ -8,4 +8,4 @@
 [Elastic-Job 2.x](https://github.com/dangdangdotcom/elastic-job)
 
 ## TBSchedule
-[Taobao/TBSchedule](https://github.com/taobao/TBSchedule)
+[Taobao/TBSchedule](http://code.taobao.org/p/tbschedule/)
