@@ -8,10 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>quartz-demo</artifactId>
+    <artifactId>quartz-standalone-demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>quartz-demo</name>
+    <name>quartz-standalone-demo</name>
     <url>http://maven.apache.org</url>
 
     <properties>

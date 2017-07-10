@@ -1,4 +1,4 @@
-package com.mindflow.job.quartz.service;
+package com.mindflow.job.quartz.standalone.service;
 
 /**
  * ${DESCRIPTION}

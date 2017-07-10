@@ -11,9 +11,9 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.mindflow.job.quartz" />
+	<context:component-scan base-package="com.mindflow.job.quartz.standalone" />
 
-	<!--引入其它配置-->
+	<!--quartz-->
 	<import resource="spring-quartz.xml"/>
 
 </beans>

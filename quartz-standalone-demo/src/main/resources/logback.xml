@@ -1,5 +1,5 @@
 <configuration debug="false">
-    <contextName>quartz-sample</contextName>
+    <contextName>quartz-standalone</contextName>
     <property name="LOG_HOME" value="D:/logs/" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -9,7 +9,7 @@
     </appender>
 
     <appender name="Info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/info/quartz-sample-info.log</file>
+        <file>${LOG_HOME}/info/quartz-standalone-info.log</file>
         <appender>true</appender>
         <Encoding>UTF-8</Encoding>
 
@@ -19,7 +19,7 @@
 
         <!-- 每天生成日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/info/quartz-sample.%d{yyyy-MM-dd}-info.log.gz
+            <fileNamePattern>${LOG_HOME}/info/quartz-standalone.%d{yyyy-MM-dd}-info.log.gz
             </fileNamePattern>
             <!-- 日志文件保留15天 -->
             <maxHistory>360</maxHistory>

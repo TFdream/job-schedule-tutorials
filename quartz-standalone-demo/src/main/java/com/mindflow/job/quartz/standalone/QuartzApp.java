@@ -1,6 +1,6 @@
-package com.mindflow.job.quartz;
+package com.mindflow.job.quartz.standalone;
 
-import com.mindflow.job.quartz.service.QuartzDemoService;
+import com.mindflow.job.quartz.standalone.service.QuartzDemoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**

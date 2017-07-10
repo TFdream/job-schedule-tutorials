@@ -13,7 +13,7 @@
     <!-- 引入配置文件 -->
     <util:properties id="quartz" location="classpath:quartz.properties"/>
 
-    <bean id="quartzDemoService" class="com.mindflow.job.quartz.service.QuartzDemoService" >
+    <bean id="quartzDemoService" class="com.mindflow.job.quartz.standalone.service.QuartzDemoService" >
         <constructor-arg index="0" value="#{quartz['url']}"/>
         <constructor-arg index="1" value="#{quartz['priority']}"/>
     </bean>
@@ -34,7 +34,7 @@
     </bean>
 
     <!--simple job-->
-    <bean id="simpleJobService" class="com.mindflow.job.quartz.service.SimpleJobService" />
+    <bean id="simpleJobService" class="com.mindflow.job.quartz.standalone.service.SimpleJobService" />
     <bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="simpleJobService" />
         <property name="targetMethod" value="execute" />
